@@ -1,10 +1,12 @@
-directory "/usr/local" do
+homebrew_install_directory = "/usr/local"
+
+directory homebrew_install_directory do
   user "root"
-  group "staff"
+  group "admin"
 end
 
 execute "install homebrew" do
-  command 'https://github.com/Homebrew/homebrew.git'
+  command "git clone https://github.com/Homebrew/homebrew.git #{homebrew_install_directory}"
   not_if { File.exist? '/usr/local/bin/brew' }
 end
 
