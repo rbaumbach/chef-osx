@@ -1,20 +1,21 @@
-homebrew_repo = 'git clone https://github.com/Homebrew/homebrew.git'
-homebrew_install_directory = '/usr/local'
-homebrew_bin = '/usr/local/bin/brew'
-
-directory homebrew_install_directory do
-  user "root"
-  group "admin"
-  not_if { Directory.exists? homebrew_install_directory }
+directory '/usr/local' do
+  group 'admin'
+  mode '0775'
 end
 
 execute "install homebrew" do
-  command "#{homebrew_repo} #{homebrew_install_directory}"
+  command 'git clone https://github.com/Homebrew/homebrew.git /usr/local'
+  # cwd '/usr/local'
+  group 'admin'
   user ENV['SUDO_USER']
-  group "admin"
-  not_if { File.exist? homebrew_bin }
+  not_if { File.exist? '/usr/local/bin/brew' }
 end
-
-execute "doctor brew" do
-  command "brew doctor"
-end
+#
+# execute "change owner" do
+#   command "chown -R sprout-user /usr/local/"
+# end
+#
+# execute "doctor brew" do  # whole resource has issues.....
+#   command "brew doctor"
+#   user ENV['SUDO_USER']
+# end
