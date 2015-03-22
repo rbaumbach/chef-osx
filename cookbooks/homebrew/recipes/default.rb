@@ -13,7 +13,7 @@ end
 git '/usr/local' do
   repository 'https://github.com/Homebrew/homebrew.git'
   user node['homebrew']['user']
-  group node['homebrew']['group']
+  group 'admin'
 end
 
 execute "brew doctor" do
