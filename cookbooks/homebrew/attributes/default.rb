@@ -1,3 +1,1 @@
-default['homebrew'] = {
-  'user': ENV['SUDO_USER'],
-}
+default['homebrew']['user'] = ENV['SUDO_USER']
