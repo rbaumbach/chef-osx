@@ -1,3 +1,5 @@
+include_recipe 'homebrew'
+
 execute 'tap cask' do
   command 'brew tap caskroom/cask'
   user node['homebrew']['user']
