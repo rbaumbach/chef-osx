@@ -22,4 +22,8 @@ execute "brew doctor" do
   # there is no way to ignore warnings thrown by brew doctor, will nearly
   # always return a 1 and will cause chef failures
   returns [0, 1]
+  not_if { File.exist? "#{Chef::Config[:file_cache_path]}/chef-homebrew.tmp" }
 end
+
+# used to indicate chef for homebrew has been run at least once
+file "#{Chef::Config[:file_cache_path]}/chef-homebrew.tmp"
