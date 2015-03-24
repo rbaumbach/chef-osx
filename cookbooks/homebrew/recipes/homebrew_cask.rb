@@ -1,11 +1,7 @@
-# directory '/usr/local/Library/Taps' do # I don't believe I need this
-#   owner node['homebrew']['user']
-#   recursive true
-# end
-
 execute 'tap cask' do
   command 'brew tap caskroom/cask'
   user node['homebrew']['user']
+  not_if { File.exist? '/usr/local/Library/Taps/caskroom/homebrew-cask/bin/brew-cask' }
 end
 
 package 'brew-cask'
